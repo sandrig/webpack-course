@@ -1,4 +1,4 @@
-class Post {
+export class Post {
   constructor(title) {
     this.title = title;
     this.date = new Date();
@@ -9,5 +9,9 @@ class Post {
       title: this.title,
       date: this.date.toJSON()
     })
+  }
+
+  get upperCaseTitle() {
+    return this.title.toUpperCase()
   }
 }
