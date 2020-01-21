@@ -13,6 +13,9 @@ module.exports = {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist')
   },
+  resolve: {
+    extensions: ['.js', '.png']
+  },
   plugins: [
     new HTMLWebpackPlugin({
       template: './index.html'
