@@ -2,7 +2,7 @@
   "name": "webpack-course",
   "version": "1.0.0",
   "description": "Webpack course",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
