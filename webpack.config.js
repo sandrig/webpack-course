@@ -1,6 +1,6 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
@@ -17,7 +17,7 @@ const optimization = () => {
     }
   };
 
-  if(isProd) {
+  if (isProd) {
     config.minimizer = [
       new OptimizeCssAssetsWebpackPlugin(),
       new TerserWebpackPlugin()
@@ -41,7 +41,7 @@ const cssLoaders = extra => {
     'css-loader'
   ];
 
-  if(extra) {
+  if (extra) {
     loaders.push(extra)
   }
 
@@ -58,11 +58,25 @@ const babelOptions = preset => {
     ]
   };
 
-  if(preset) {
+  if (preset) {
     options.presets.push(preset)
   }
 
   return options;
+};
+
+const jsLoaders = () => {
+  const loaders = [{
+    loader: 'babel-loader',
+    options: babelOptions()
+  }];
+
+  if(isDev) {
+    loaders.push('eslint-loader')
+  }
+
+
+  return loaders;
 };
 
 module.exports = {
@@ -140,10 +154,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: {
-          loader: 'babel-loader',
-          options: babelOptions()
-        }
+        use: jsLoaders()
       },
       {
         test: /\.ts$/,
